@@ -1,4 +1,5 @@
-﻿namespace Sino.Extensions.ZqSign.Register
+﻿
+namespace Sino.Extensions.ZqSign.Register
 {
     /// <summary>
     /// 个人用户颁发数字证书

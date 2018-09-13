@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Linq;
+using Sino.Extensions.ZqSign.Utils;
 
 namespace Sino.Extensions.ZqSign
 {
@@ -17,6 +18,7 @@ namespace Sino.Extensions.ZqSign
         /// <summary>
         /// 应用标识符
         /// </summary>
+        [UrlProperty("zqid")]
         public string AppId { get; set; }
 
         /// <summary>
@@ -24,7 +26,7 @@ namespace Sino.Extensions.ZqSign
         /// </summary>
         public string Signature { get; set; }
 
-        public FormUrlEncodedContent GetContent()
+        public FormUrlEncodedContent GetContent(string privateKey)
         {
             var urlattrType = typeof(UrlPropertyAttribute);
             Dictionary<string, string> param = new Dictionary<string, string>();
@@ -44,6 +46,9 @@ namespace Sino.Extensions.ZqSign
                     }
                 }
             }
+            var noSign = new FormUrlEncodedContent(param);
+            string signval = CryptionUtils.EncryptByPrivateKey(noSign.ToString(), privateKey);
+            param.Add("sign_val", signval);
 
             return new FormUrlEncodedContent(param);
         }
