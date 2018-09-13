@@ -9,12 +9,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{1622BD38-3
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".global", ".global", "{64CE536A-E418-4920-BA88-C17CD1787BFD}"
 	ProjectSection(SolutionItems) = preProject
+		appveyor.yml = appveyor.yml
+		Build.ps1 = Build.ps1
 		ReadMe.md = ReadMe.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sino.Extensions.ZqSign", "src\Sino.Extensions.ZqSign\Sino.Extensions.ZqSign.csproj", "{DFEA7579-3BAE-4AE6-8B94-169206D6781E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sino.Extensions.ZqSign", "src\Sino.Extensions.ZqSign\Sino.Extensions.ZqSign.csproj", "{DFEA7579-3BAE-4AE6-8B94-169206D6781E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sino.Extensions.ZqSign.UnitTest", "test\Sino.Extensions.ZqSign.UnitTest\Sino.Extensions.ZqSign.UnitTest.csproj", "{C61CA1AA-1339-438C-8132-B36659B1BD67}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sino.Extensions.ZqSignUnitTest", "test\Sino.Extensions.ZqSignUnitTest\Sino.Extensions.ZqSignUnitTest.csproj", "{468A4F1E-FF79-40A3-AD45-B84441632A10}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,17 +28,17 @@ Global
 		{DFEA7579-3BAE-4AE6-8B94-169206D6781E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFEA7579-3BAE-4AE6-8B94-169206D6781E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFEA7579-3BAE-4AE6-8B94-169206D6781E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C61CA1AA-1339-438C-8132-B36659B1BD67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C61CA1AA-1339-438C-8132-B36659B1BD67}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C61CA1AA-1339-438C-8132-B36659B1BD67}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C61CA1AA-1339-438C-8132-B36659B1BD67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{468A4F1E-FF79-40A3-AD45-B84441632A10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{468A4F1E-FF79-40A3-AD45-B84441632A10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{468A4F1E-FF79-40A3-AD45-B84441632A10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{468A4F1E-FF79-40A3-AD45-B84441632A10}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{DFEA7579-3BAE-4AE6-8B94-169206D6781E} = {5F55FE54-7F7C-468C-AC56-65775F8BEFC5}
-		{C61CA1AA-1339-438C-8132-B36659B1BD67} = {1622BD38-3AF9-49B6-9208-B31A5BB3CB23}
+		{468A4F1E-FF79-40A3-AD45-B84441632A10} = {1622BD38-3AF9-49B6-9208-B31A5BB3CB23}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {325C0682-54D8-4D6B-9FE9-FE2F1E1FE2BC}

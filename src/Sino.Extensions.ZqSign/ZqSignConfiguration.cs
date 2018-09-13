@@ -19,5 +19,10 @@
         /// 公钥
         /// </summary>
         public string PublicKey { get; set; }
+
+        /// <summary>
+        /// 服务地址
+        /// </summary>
+        public string Url { get; set; }
     }
 }
