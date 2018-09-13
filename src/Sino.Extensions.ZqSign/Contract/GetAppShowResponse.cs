@@ -67,18 +67,19 @@ namespace Sino.Extensions.ZqSign.Contract
         /// <summary>
         /// 关键字相对坐标X
         /// </summary>
-        [JsonProperty("x")]
+        [JsonProperty("keyword_x")]
         public string X { get; set; }
 
         /// <summary>
         /// 关键字相对坐标Y
         /// </summary>
-        [JsonProperty("y")]
+        [JsonProperty("keyword_y")]
         public string Y { get; set; }
 
         /// <summary>
         /// 签署人手机号
         /// </summary>
+        [JsonProperty("mobile")]
         public string Mobile { get; set; }
     }
 }

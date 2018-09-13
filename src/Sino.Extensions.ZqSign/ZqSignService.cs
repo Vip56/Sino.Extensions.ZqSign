@@ -45,6 +45,8 @@ namespace Sino.Extensions.ZqSign
             // 防止HttpClientBug忽略DNS刷新
             var sp = ServicePointManager.FindServicePoint(new Uri(Url));
             sp.ConnectionLeaseTimeout = 60 * 1000;
+
+            Http = new HttpClient();
         }
 
         public async Task<O> GetResponseAsync<O, I>(string path, ZqSignRequestBase<I> request) where I : class where O: ZqSignResponseBase
@@ -55,10 +57,11 @@ namespace Sino.Extensions.ZqSign
             if (request == null)
                 throw new ArgumentNullException(nameof(request));
 
+            request.AppId = AppId;
+
             string requestUrl = Url + path;
 
-            var content = request.GetContent(PrivateKey);
-
+            var content = await request.GetContentAsync(PrivateKey);
             var response = await Http.PostAsync(requestUrl, content);
             if(response.IsSuccessStatusCode)
             {
@@ -123,12 +126,13 @@ namespace Sino.Extensions.ZqSign
             return response;
         }
 
-        public Task<GetSignViewResponse> GetSignViewAsync(GetSignViewRequest request)
+        public async Task<GetSignViewResponse> GetSignViewAsync(GetSignViewRequest request)
         {
             const string path = "mobileSignView";
 
-            var content = request.GetContent(PrivateKey);
-            var queryString = content.ToString();
+            request.AppId = AppId;
+            var content = await request.GetContentAsync(PrivateKey);
+            var queryString = await content.ReadAsStringAsync();
 
             var response = new GetSignViewResponse
             {
@@ -136,7 +140,7 @@ namespace Sino.Extensions.ZqSign
                 Code = "0"
             };
 
-            return Task.FromResult(response);
+            return response;
         }
 
         public async Task<ZqSignResponseBase> UndoContractAsync(UndoContractRequest request)
@@ -177,7 +181,7 @@ namespace Sino.Extensions.ZqSign
         public async Task<GetAppShowResponse> GetAppShowAsync(GetAppShowRequest request)
         {
             const string path = "appShowView";
-            var response = await GetResponseAsync<ZqSignResponseBase, AppSignContractRequest>(path, request);
+            var response = await GetResponseAsync<GetAppShowResponse, GetAppShowRequest>(path, request);
             return response;
         }
 

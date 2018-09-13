@@ -19,4 +19,10 @@
     <ProjectReference Include="..\..\src\Sino.Extensions.ZqSign\Sino.Extensions.ZqSign.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="SignatureImage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

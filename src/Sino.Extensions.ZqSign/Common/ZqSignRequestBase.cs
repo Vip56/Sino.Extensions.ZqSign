@@ -4,6 +4,8 @@ using System.Net.Http;
 using System.Text;
 using System.Linq;
 using Sino.Extensions.ZqSign.Utils;
+using System.Threading.Tasks;
+using System.Net;
 
 namespace Sino.Extensions.ZqSign
 {
@@ -26,10 +28,10 @@ namespace Sino.Extensions.ZqSign
         /// </summary>
         public string Signature { get; set; }
 
-        public FormUrlEncodedContent GetContent(string privateKey)
+        public async Task<FormUrlEncodedContent> GetContentAsync(string privateKey)
         {
             var urlattrType = typeof(UrlPropertyAttribute);
-            Dictionary<string, string> param = new Dictionary<string, string>();
+            SortedDictionary<string, string> param = new SortedDictionary<string, string>();
             foreach(var propertyInfo in typeof(T).GetProperties())
             {
                 if (propertyInfo.Name != EXCLUDE_PARAMS && propertyInfo.Name != EXCLUDE_SIGNATURE)
@@ -47,7 +49,9 @@ namespace Sino.Extensions.ZqSign
                 }
             }
             var noSign = new FormUrlEncodedContent(param);
-            string signval = CryptionUtils.EncryptByPrivateKey(noSign.ToString(), privateKey);
+            var encodeContent = await noSign.ReadAsStringAsync();
+            var decodeContent = WebUtility.UrlDecode(encodeContent);
+            string signval = CryptionUtils.EncryptByPrivateKey(decodeContent, privateKey);
             param.Add("sign_val", signval);
 
             return new FormUrlEncodedContent(param);
