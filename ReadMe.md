@@ -7,6 +7,12 @@
 Install-Package Sino.Extensions.ZqSign
 ```  
 
+在`Startup`中进行配置，增加用于读和写的MySQL连接字符串
+```
+services.AddZqSignService(appid, privateKey, publicKey, url);
+```   
+后面直接使用自带的IOC使用`IZqSignService`接口来操作
+
 ### 文件目录结构   
 * Common：通用文件夹   
 * Contract：合同相关   
