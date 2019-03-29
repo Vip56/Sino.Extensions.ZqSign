@@ -22,4 +22,4 @@ exec { & dotnet build .\src\Sino.Extensions.ZqSign -c Release }
 
 exec { & dotnet pack .\src\Sino.Extensions.ZqSign -c Release -o .\artifacts --version-suffix=$revision }
 
-exec { & dotnet nuget push .\src\Sino.Extensions.ZqSign\artifacts\*.nupkg -k cccc9d81-f2a8-4230-92ef-5516f045ce45 -s https://api.nuget.org/v3/index.json }
+exec { & dotnet nuget push .\src\Sino.Extensions.ZqSign\artifacts\*.nupkg -k oy2gtj6fnkb277lfkplaviknvqexd42eznw7hgonam6zou -s https://api.nuget.org/v3/index.json }
