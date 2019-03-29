@@ -47,9 +47,10 @@ namespace Sino.Extensions.ZqSign
             sp.ConnectionLeaseTimeout = 60 * 1000;
 
             Http = new HttpClient();
+            Http.Timeout= new TimeSpan(0, 3, 0); //超时时间
         }
 
-        public async Task<O> GetResponseAsync<O, I>(string path, ZqSignRequestBase<I> request) where I : class where O: ZqSignResponseBase
+        public async Task<O> GetResponseAsync<O, I>(string path, ZqSignRequestBase<I> request, bool useString = false) where I : class where O: ZqSignResponseBase
         {
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException(nameof(path));
@@ -60,8 +61,15 @@ namespace Sino.Extensions.ZqSign
             request.AppId = AppId;
 
             string requestUrl = Url + path;
-
-            var content = await request.GetContentAsync(PrivateKey);
+            HttpContent content = null;
+            if (useString)
+            {
+                content = await request.GetStringContentAsync(PrivateKey);
+            }
+            else
+            {
+                content = await request.GetContentAsync(PrivateKey);
+            }
             var response = await Http.PostAsync(requestUrl, content);
             if(response.IsSuccessStatusCode)
             {
@@ -174,7 +182,7 @@ namespace Sino.Extensions.ZqSign
         public async Task<ZqSignResponseBase> AppSignContractAsync(AppSignContractRequest request)
         {
             const string path = "appSignContract";
-            var response = await GetResponseAsync<ZqSignResponseBase, AppSignContractRequest>(path, request);
+            var response = await GetResponseAsync<ZqSignResponseBase, AppSignContractRequest>(path, request, true);
             return response;
         }
 

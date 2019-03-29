@@ -56,5 +56,41 @@ namespace Sino.Extensions.ZqSign
 
             return new FormUrlEncodedContent(param);
         }
+
+        public Task<StringContent> GetStringContentAsync(string privateKey)
+        {
+            var urlattrType = typeof(UrlPropertyAttribute);
+            SortedDictionary<string, string> param = new SortedDictionary<string, string>();
+            StringBuilder sb = new StringBuilder();
+            foreach (var propertyInfo in typeof(T).GetProperties())
+            {
+                if (propertyInfo.Name != EXCLUDE_PARAMS && propertyInfo.Name != EXCLUDE_SIGNATURE)
+                {
+                    var attrs = propertyInfo.GetCustomAttributes(urlattrType, false);
+                    if (attrs.Length > 0)
+                    {
+                        var attr = attrs[0] as UrlPropertyAttribute;
+                        param.Add(attr.PropertyName, propertyInfo.GetValue(this)?.ToString());
+                    }
+                    else
+                    {
+                        param.Add(propertyInfo.Name, propertyInfo.GetValue(this)?.ToString());
+                    }
+                }
+            }
+            foreach(var kv in param)
+            {
+                sb.Append($"{WebUtility.UrlEncode(kv.Key)}={WebUtility.UrlEncode(kv.Value)}&");
+            }
+            sb.Remove(sb.Length - 1, 1);
+            var encodeContent = WebUtility.UrlDecode(sb.ToString());
+            string signval = CryptionUtils.EncryptByPrivateKey(encodeContent, privateKey);
+            sb.Append($"&sign_val={WebUtility.UrlEncode(signval)}");
+            var content = new StringContent(sb.ToString(), Encoding.UTF8);
+            content.Headers.Remove("Content-Type");
+            content.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+
+            return Task.FromResult(content);
+        }
     }
 }
