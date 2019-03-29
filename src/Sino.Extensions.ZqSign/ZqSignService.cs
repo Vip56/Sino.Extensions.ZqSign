@@ -47,6 +47,7 @@ namespace Sino.Extensions.ZqSign
             sp.ConnectionLeaseTimeout = 60 * 1000;
 
             Http = new HttpClient();
+            Http.Timeout= new TimeSpan(0, 3, 0); //超时时间
         }
 
         public async Task<O> GetResponseAsync<O, I>(string path, ZqSignRequestBase<I> request) where I : class where O: ZqSignResponseBase
