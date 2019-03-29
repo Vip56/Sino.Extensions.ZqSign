@@ -16,7 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".global", ".global", "{64CE
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sino.Extensions.ZqSign", "src\Sino.Extensions.ZqSign\Sino.Extensions.ZqSign.csproj", "{DFEA7579-3BAE-4AE6-8B94-169206D6781E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sino.Extensions.ZqSignUnitTest", "test\Sino.Extensions.ZqSignUnitTest\Sino.Extensions.ZqSignUnitTest.csproj", "{468A4F1E-FF79-40A3-AD45-B84441632A10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sino.Extensions.ZqSignUnitTest", "test\Sino.Extensions.ZqSignUnitTest\Sino.Extensions.ZqSignUnitTest.csproj", "{468A4F1E-FF79-40A3-AD45-B84441632A10}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
